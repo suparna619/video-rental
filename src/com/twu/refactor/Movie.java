@@ -21,5 +21,11 @@ public class Movie {
 	public String getTitle () {
 		return title;
 	}
+
+
+
+    public int getDaysRented(Rental rental) {
+        return rental.daysRented;
+    }
 }
 

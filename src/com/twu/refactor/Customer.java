@@ -31,7 +31,7 @@ public class Customer {
 
             thisAmount = rental.getAmount();
 
-            frequentRenterPoints += getFrequentRenterPoints(rental);
+            frequentRenterPoints += rental.getFrequentRenterPoints(rental);
 
 			// show figures for this rental
             result = getRentalSubTotal(result, thisAmount, rental);
@@ -49,14 +49,7 @@ public class Customer {
         return result;
     }
 
-    private int getFrequentRenterPoints(Rental each) {
-        int frequentRenterPoints = 0;
-        frequentRenterPoints++;
-        if (each.isNewRelease()
-                && each.getDaysRented() > 1)
-            frequentRenterPoints++;
-        return frequentRenterPoints;
-    }
+
 
     private String getFooterLines(double totalAmount, int frequentRenterPoints) {
         String result = "Amount owed is " + String.valueOf(totalAmount) + "\n";

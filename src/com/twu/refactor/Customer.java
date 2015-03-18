@@ -28,17 +28,12 @@ public class Customer {
 		while (rentals.hasNext()) {
 			double thisAmount;
 			Rental rental = rentals.next();
-
             thisAmount = rental.getAmount();
-
             frequentRenterPoints += rental.getFrequentRenterPoints(rental);
-
-			// show figures for this rental
             result = getRentalSubTotal(result, thisAmount, rental);
             totalAmount += thisAmount;
 
 		}
-		// add footer lines
         result += getFooterLines(totalAmount, frequentRenterPoints);
 		return result;
 	}
@@ -48,8 +43,6 @@ public class Customer {
                 + String.valueOf(thisAmount) + "\n";
         return result;
     }
-
-
 
     private String getFooterLines(double totalAmount, int frequentRenterPoints) {
         String result = "Amount owed is " + String.valueOf(totalAmount) + "\n";

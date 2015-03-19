@@ -22,10 +22,16 @@ public class Movie {
 		return title;
 	}
 
-
-
     public int getDaysRented(Rental rental) {
         return rental.daysRented;
+    }
+
+    public double getRentalAmount(Rental rental) {
+        return getPriceCode().getCostFor(rental.daysRented);
+    }
+
+    public boolean isNewRelease(Rental rental) {
+        return (rental.getMovie().getPriceCode() == MoviePricingCategory.NEW_RELEASE);
     }
 }
 

@@ -29,20 +29,20 @@ public class CustomerTest extends TestCase {
 
     public void testEmpty() throws Exception {
     	dinsdale = new Customer("Dinsdale Pirhana");
-        equalsFile("1st Output", "outputEmpty", dinsdale.statement());
+        equalsFile("1st Output", "outputEmpty", TextStatement.statement(dinsdale));
     }
     public void testCustomer() throws Exception {
-        equalsFile("1st Output", "output1", dinsdale.statement());
+        equalsFile("1st Output", "output1", TextStatement.statement(dinsdale));
     }
 
     public void testChange() throws Exception {
     	la.setPriceCode(MoviePricingCategory.REGULAR);
-        equalsFile("1st Output", "outputChange", dinsdale.statement());
+        equalsFile("1st Output", "outputChange", TextStatement.statement(dinsdale));
     }
 
 
     public void testHtml() throws Exception {
-        equalsFile("1st Output", "outputHtml", dinsdale.htmlStatement());
+        equalsFile("1st Output", "outputHtml", HtmlStatement.htmlStatement());
     }
 
     	

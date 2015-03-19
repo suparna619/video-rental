@@ -15,18 +15,10 @@ public class Rental {
         return movie;
     }
 
-    public double getAmount() {
-        return movie.getPriceCode().getCostFor(daysRented);
-    }
-
-    public boolean isNewRelease() {
-        return (getMovie().getPriceCode() == MoviePricingCategory.NEW_RELEASE);
-    }
-
     protected int getFrequentRenterPoints(Rental each) {
         int frequentRenterPoints = 0;
         frequentRenterPoints++;
-        if (each.isNewRelease()
+        if (each.movie.isNewRelease(each)
                 && each.movie.getDaysRented(each) > 1)
             frequentRenterPoints++;
         return frequentRenterPoints;

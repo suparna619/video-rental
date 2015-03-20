@@ -1,12 +1,12 @@
 package com.twu.refactor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 public class Customer implements Billable {
 
 	private String name;
-	ArrayList<Rental> rentalList = new ArrayList<Rental>();
+	private ArrayList<Rental> rentalList = new ArrayList<Rental>();
 
 	public Customer(String name) {
 		this.name = name;
@@ -20,11 +20,35 @@ public class Customer implements Billable {
 		return name;
 	}
 
-
-    String getRentalSubTotal(String result, double thisAmount, Rental rental) {
-        result += "\t" + rental.getMovie().getTitle() + "\t"
-                + String.valueOf(thisAmount) + "\n";
-        return result;
+    public double getTotalAmount() {
+        double totalAmount = 0;
+        for (Rental rental : rentalList)
+            totalAmount += rental.getRentalAmount();
+        return totalAmount;
     }
 
+    public int getTotalFrequentRentalPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentalList)
+            frequentRenterPoints += rental.getFrequentRentalPoints();
+        return frequentRenterPoints;
+    }
+
+    public String getHTMLRentalSubTotal(Rental rental) {
+        String statement;
+        statement = rental.movie.getTitle() + ": "
+                + String.valueOf(rental.getRentalAmount()) + "<BR>";
+        return statement;
+    }
+
+    public String getRentalSubTotal(Rental rental) {
+        String statement;
+        statement = "\t" + rental.movie.getTitle() + "\t"
+                + String.valueOf(rental.getRentalAmount()) + "\n";
+        return statement;
+    }
+
+    public List<Rental> getRentalList() {
+        return rentalList;
+    }
 }

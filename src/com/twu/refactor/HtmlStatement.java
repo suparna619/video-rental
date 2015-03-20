@@ -1,14 +1,26 @@
 package com.twu.refactor;
 
-/**
- * Created by suparnad on 3/19/2015.
- */
+import java.util.List;
+
 public class HtmlStatement {
-    public static String htmlStatement() {
-        return "<H1>Rentals for <EM>Dinsdale Pirhana</EM></H1>" +
-                "<P>Monty Python and the Holy Grail: 3.5<BR>Ran: 2.0<BR>LA Confidential: 6.0" +
-                "<BR>Star Trek 13.2: 3.0<BR>Wallace and Gromit: 6.0" +
-                "<BR><P>You owe <EM>20.5</EM>" +
-                "<P>On this rental you earned <EM>6</EM> frequent renter points<P>\n";
+    public String getHTMLHeader(Billable billable) {
+        return "<H1>Rentals for<EM>"+ billable.getName() +"</EM></H1><P>";
+    }
+
+    public String getHTMLFooter(double totalAmount, int frequentRenterPoints) {
+        String statement;
+        statement = "<P>You owe<EM>" + String.valueOf(totalAmount) + "</EM>";
+        statement += "<P>On this rental you earned<EM>" + String.valueOf(frequentRenterPoints)
+                + "</EM>frequent renter points<P>";
+        return statement;
+    }
+
+    public String getHtmlStatement(Customer customer, List<Rental> rentalList) {
+        String htmlStatement = getHTMLHeader(customer);
+        for (Rental rental : rentalList) {
+            htmlStatement += customer.getHTMLRentalSubTotal(rental);
+        }
+        htmlStatement += getHTMLFooter(customer.getTotalAmount(), customer.getTotalFrequentRentalPoints());
+        return htmlStatement;
     }
 }

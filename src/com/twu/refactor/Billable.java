@@ -1,8 +1,13 @@
 package com.twu.refactor;
 
-/**
- * Created by suparnad on 3/19/2015.
- */
+import java.util.List;
+
 public interface Billable {
     String getName();
+
+    double getTotalAmount();
+
+    int getTotalFrequentRentalPoints();
+
+    List<Rental> getRentalList();
 }

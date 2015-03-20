@@ -5,22 +5,25 @@ import org.junit.Test;
 
 public class MoviePricingCategoryTest extends TestCase {
     @Test
-    public void test_kids_category_gives_correct_cost_for_4_days_rented() {
+    public void testKidsCategoryGivesCorrectCostFor4DaysRented() {
         double actualCost = MoviePricingCategory.KIDS.getCostFor(4);
-        assertEquals(3.0,actualCost,0.0);
+        assertEquals(3,actualCost,0.0);
     }
-
     @Test
-    public void test_kids_category_gives_correct_cost_for_less_than_3_days_rented() {
-        double actualCostFor1Days = MoviePricingCategory.KIDS.getCostFor(1);
+    public void testKidsCategoryGivesCorrectCostFor1DaysRented() {
+        double actualCostFor1Day = MoviePricingCategory.KIDS.getCostFor(1);
         double actualCostFor2Days = MoviePricingCategory.KIDS.getCostFor(2);
-        assertEquals(1.5,actualCostFor1Days,0.0);
+        assertEquals(1.5,actualCostFor1Day,0.0);
         assertEquals(1.5,actualCostFor2Days,0.0);
     }
-
     @Test
-    public void test_new_release_category_gives_correct_cost_for_less_than_6_days_rented() {
-        double actualCostFor6Days = MoviePricingCategory.NEW_RELEASE.getCostFor(6);
-        assertEquals(18,actualCostFor6Days,0.0);
+    public void testNewReleaseCategoryGivesCorrectCostForMoreThan3DaysRented() {
+        double actualCost = MoviePricingCategory.NEW_RELEASE.getCostFor(6);
+        assertEquals(18,actualCost,0.0);
+    }
+    @Test
+    public void testRegularCategoryGivesCorrectCostForMoreThan3DaysRented() {
+        double actualCost = MoviePricingCategory.REGULAR.getCostFor(4);
+        assertEquals(5,actualCost,0.0);
     }
 }

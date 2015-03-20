@@ -10,28 +10,20 @@ public class Movie {
 		this.priceCode = priceCode;
 	}
 
-	public MoviePricingCategory getPriceCode() {
-		return priceCode;
-	}
-
-	public void setPriceCode(MoviePricingCategory arg) {
-    	priceCode = arg;
+    public void setPriceCode(MoviePricingCategory newMoviePricingCode) {
+    	priceCode = newMoviePricingCode;
 	}
 
 	public String getTitle () {
 		return title;
 	}
 
-    public int getDaysRented(Rental rental) {
-        return rental.daysRented;
+    public boolean isNewRelease() {
+        return priceCode == MoviePricingCategory.NEW_RELEASE;
     }
 
-    public double getRentalAmount(Rental rental) {
-        return getPriceCode().getCostFor(rental.daysRented);
-    }
-
-    public boolean isNewRelease(Rental rental) {
-        return (rental.getMovie().getPriceCode() == MoviePricingCategory.NEW_RELEASE);
+    public double getCostForMovie(int daysRented) {
+        return priceCode.getCostFor(daysRented);
     }
 }
 

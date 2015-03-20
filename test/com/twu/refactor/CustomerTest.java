@@ -17,7 +17,7 @@ public class CustomerTest extends TestCase {
 	private Movie ran = new Movie("Ran", MoviePricingCategory.REGULAR);
 	private Movie la = new Movie("LA Confidential", MoviePricingCategory.NEW_RELEASE);
 	private Movie trek = new Movie("Star Trek 13.2", MoviePricingCategory.NEW_RELEASE);
-	private Movie wallace = new Movie("Wallace and Gromit", MoviePricingCategory.KIDS);
+	private Movie wallace = new Movie("Wallace and Gromit", MoviePricingCategory.KIDS );
 
     public void setUp (){
        dinsdale.addRental(new Rental (python, 3));
@@ -29,23 +29,22 @@ public class CustomerTest extends TestCase {
 
     public void testEmpty() throws Exception {
     	dinsdale = new Customer("Dinsdale Pirhana");
-        equalsFile("1st Output", "outputEmpty", TextStatement.statement(dinsdale));
+        equalsFile("1st Output", "outputEmpty", new Statement().getStatement(dinsdale, dinsdale.getRentalList()));
     }
+
     public void testCustomer() throws Exception {
-        equalsFile("1st Output", "output1", TextStatement.statement(dinsdale));
+        equalsFile("1st Output", "output1", new Statement().getStatement(dinsdale, dinsdale.getRentalList()));
     }
 
     public void testChange() throws Exception {
     	la.setPriceCode(MoviePricingCategory.REGULAR);
-        equalsFile("1st Output", "outputChange", TextStatement.statement(dinsdale));
+        equalsFile("1st Output", "outputChange", new Statement().getStatement(dinsdale, dinsdale.getRentalList()));
     }
-
 
     public void testHtml() throws Exception {
-        equalsFile("1st Output", "outputHtml", HtmlStatement.htmlStatement());
+        equalsFile("1st Output", "outputHtml", new HtmlStatement().getHtmlStatement(dinsdale, dinsdale.getRentalList()));
     }
 
-    	
     protected void equalsFile(String message, String fileName, String actualValue) throws IOException{
         BufferedReader file = new BufferedReader (new FileReader (GOLD_PATH + '/' + fileName));
         BufferedReader actualStream = new BufferedReader (new StringReader (actualValue));
@@ -54,5 +53,4 @@ public class CustomerTest extends TestCase {
             assertEquals ("in file: " + fileName, thisFileLine, actualStream.readLine());
         }
     }
-
 }
